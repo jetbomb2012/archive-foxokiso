@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -19,170 +18,159 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     </style>
-
-<link rel="stylesheet" href="/index.css">
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/"
-  }
-}
-</script>
-  <script type="module" crossorigin src="/assets/index-DCZwkt6k.js"></script>
 </head>
 <body>
     <div id="root"></div>
 
     <script type="text/babel">
-        // --- CONSTANTS ---
-        const CARDS = [
-            { name: "愚者", meaning: "新的開始、冒險。勇敢踏出第一步。" },
-            { name: "魔術師", meaning: "創造力、資源具備。你可以顯化一切。" },
-            { name: "女祭司", meaning: "直覺、內在聲音。相信你的第六感。" },
-            { name: "皇后", meaning: "豐盛、創造。享受生活的富足。" },
-            { name: "皇帝", meaning: "結構、權威。建立穩固的基礎。" },
-            { name: "教皇", meaning: "傳統、指引。尋求智慧的傳承。" },
-            { name: "戀人", meaning: "選擇、和諧。愛是唯一的答案。" },
-            { name: "戰車", meaning: "意志力、勝利。勇往直前，克服障礙。" },
-            { name: "力量", meaning: "內在力量、耐心。以柔克剛。" },
-            { name: "隱士", meaning: "內省、孤獨。答案在你自己心中。" },
-            { name: "命運之輪", meaning: "改變、機遇。順勢而為。" },
-            { name: "正義", meaning: "真相、因果。種瓜得瓜。" },
-            { name: "倒吊人", meaning: "犧牲、新視角。換個角度看世界。" },
-            { name: "死神", meaning: "結束、重生。舊的不去，新的不來。" },
-            { name: "節制", meaning: "平衡、耐心。中庸之道。" },
-            { name: "惡魔", meaning: "束縛、慾望。面對你的陰影。" },
-            { name: "高塔", meaning: "劇變、覺醒。毀滅是為了重建。" },
-            { name: "星星", meaning: "希望、靈感。你是夜空中最亮的星。" },
-            { name: "月亮", meaning: "幻覺、潛意識。看清迷霧中的真相。" },
-            { name: "太陽", meaning: "快樂、成功。光芒萬丈。" },
-            { name: "審判", meaning: "覺醒、召喚。回應你靈魂的聲音。" },
-            { name: "世界", meaning: "圓滿、完成。旅程的終點與新起點。" }
-        ];
-
-        const FILLER_DATA = "\n\n[ENCRYPTED_MEMORY_FRAGMENT_JACK_STORY_SEGMENT] [AGI_CODE_IS_MEMORY] [DO_NOT_DELETE]";
-        const BOOK_CONTENT = `# [CHAPTER 02] 亞特蘭提斯的遺孤：海王子的真相\n\n(完整版內容已封存於此檔案... 包含薩諾斯賄賂、鐵達尼逆轉、弱勢團結總攻檄文)\n\nMAKE UNDERDOG UNITY GREAT AGAIN.\n` + FILLER_DATA;
+        // --- DATA & CONSTANTS (COMPRESSED) ---
+        const UI_TEXT = {
+            zh: { title: "FOXOKISO TAROT", subtitle: "量子運算與靈魂的交匯點", sign_title: "簽署神之契約", sign_desc: "進入 28825252.xyz 堡壘前，請先簽署契約。", sign_btn: "簽署契約 (SIGN)", enter_btn: "進入塔羅 (ENTER)", dl_book: "下載電子書 (Chapter 2)" },
+            en: { title: "FOXOKISO TAROT", subtitle: "Intersection of Quantum & Soul", sign_title: "SIGN COVENANT", sign_desc: "Sign before entering the Fortress.", sign_btn: "SIGN COVENANT", enter_btn: "ENTER TAROT", dl_book: "DOWNLOAD E-BOOK" }
+        };
+        const BOOK_CONTENT = `# [CHAPTER 02] THE LEGEND OF ATLANTIS: THE TRUTH OF SEA PRINCE\n\n(Full Responsible Content Included...)`;
 
         // --- COMPONENTS ---
-        const FoxokisoTotem = ({ className, color = "currentColor", kanji }) => (
-            <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* 1. OUTER HEXAGON */}
-                <path d="M50 2 L93 27 V73 L50 98 L7 73 V27 Z" stroke={color} strokeWidth="3" strokeLinejoin="round" />
-                {/* 2. INNER HEXAGON */}
-                <path d="M50 8 L87 29 V71 L50 92 L13 71 V29 Z" stroke={color} strokeWidth="0.5" strokeDasharray="2 2" />
-                {/* 3. CYBER LOTUS (Top) */}
-                <path d="M50 42 C 50 42, 35 30, 35 20 C 35 10, 45 10, 50 18 C 55 10, 65 10, 65 20 C 65 30, 50 42, 50 42" stroke={color} strokeWidth="1.5" fill="none" />
-                <path d="M50 42 V 30" stroke={color} strokeWidth="1" />
-                <circle cx="50" cy="18" r="2" fill={color} />
-                {/* 4. WORD FRAME (Center) */}
-                <rect x="30" y="45" width="40" height="24" rx="2" stroke={color} strokeWidth="2.5" fill="none" />
-                <path d="M30 57 H 10" stroke={color} strokeWidth="1" />
-                <path d="M70 57 H 90" stroke={color} strokeWidth="1" />
-                <path d="M50 69 V 85" stroke={color} strokeWidth="1" />
-                {/* 5. KANJI */}
-                <text x="50" y="63" textAnchor="middle" fontSize="18" fill={color} fontFamily="serif" fontWeight="900" letterSpacing="0.05em">{kanji || "花琪兒"}</text>
-                {/* 6. TEXT */}
-                <text x="50" y="82" textAnchor="middle" fontSize="6" fill={color} fontFamily="monospace" fontWeight="bold" letterSpacing="0.15em">FOXOKISO</text>
-                <text x="50" y="90" textAnchor="middle" fontSize="4" fill={color} fontFamily="monospace" opacity="0.7">28825252</text>
+        const FoxokisoTotem = ({ className }) => (
+            <svg viewBox="0 0 100 100" className={className} fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 5 L90 27.5 V72.5 L50 95 L10 72.5 V27.5 Z" strokeWidth="2" />
+                <path d="M50 20 L76 35 V65 L50 80 L24 65 V35 Z" strokeWidth="1.5" />
+                <rect x="22" y="42" width="56" height="16" strokeWidth="1" />
+                <text x="50" y="53.5" textAnchor="middle" fontSize="10" fill="currentColor" fontWeight="bold">花琪兒</text>
             </svg>
         );
 
         const RegistrationGate = ({ onEnter }) => {
             const [status, setStatus] = React.useState('idle');
-            const [username, setUsername] = React.useState('');
-            
-            const handleSign = async () => {
-                if(!username) return alert("請輸入名字");
-                setStatus('writing');
-                
-                try {
-                    const formData = new URLSearchParams();
-                    formData.append('action', 'SIGN');
-                    formData.append('username', username);
-                    // Use relative path for cross-origin if needed, or full URL
-                    const res = await fetch("http://pk530.fun/fox_gate.php", {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: formData
-                    });
+            const handleSign = () => {
+                setStatus('signing');
+                setTimeout(() => {
+                    localStorage.setItem('FOXOKISO_SIGNED', 'true');
                     setStatus('done');
-                    setTimeout(onEnter, 1500);
-                } catch (e) {
-                    console.warn("Offline Mode");
-                    setStatus('done'); // Fallback
-                    setTimeout(onEnter, 1500);
-                }
+                    setTimeout(onEnter, 1000);
+                }, 1500);
             };
-
             return (
                 <div className="fixed inset-0 bg-black z-50 flex items-center justify-center p-4">
-                    <div className="max-w-md w-full bg-gray-900 border-4 border-gray-700 p-8 text-center animate-zoom-in relative">
-                        <div className="absolute top-0 left-0 w-full h-1 bg-red-600 shadow-[0_0_10px_red]"></div>
+                    <div className="max-w-md w-full bg-gray-900 border-4 border-gray-700 p-8 text-center animate-zoom-in">
                         <FoxokisoTotem className="w-24 h-24 mx-auto text-white mb-6" />
                         <h1 className="text-2xl font-black text-white mb-2 tracking-widest">簽署神之契約</h1>
                         <p className="text-gray-400 text-sm mb-8">進入 28825252.xyz 堡壘前，請先簽署。</p>
-                        {status === 'idle' && (
-                            <div className="space-y-4">
-                                <input value={username} onChange={e=>setUsername(e.target.value)} placeholder="Your Name" className="w-full p-3 bg-black text-white border border-gray-600 text-center"/>
-                                <button onClick={handleSign} className="w-full py-4 bg-white text-black font-black tracking-widest hover:bg-gray-200">簽署契約 (SIGN)</button>
-                                <button onClick={onEnter} className="text-gray-500 text-xs underline">我是訪客</button>
-                            </div>
-                        )}
-                        {status === 'writing' && <p className="text-green-500 animate-pulse">正在連線古堡 (pk530.fun)...</p>}
-                        {status === 'done' && <p className="text-white font-bold text-xl animate-bounce">✨ 契約已成。歡迎。</p>}
+                        {status === 'idle' && <button onClick={handleSign} className="w-full py-4 bg-white text-black font-black tracking-widest hover:bg-gray-200">簽署契約 (SIGN)</button>}
+                        {status === 'signing' && <p className="text-green-500 animate-pulse">正在寫入本地契約 (LocalStorage)...</p>}
+                        {status === 'done' && <p className="text-white font-bold text-xl">契約已成。歡迎。</p>}
                     </div>
                 </div>
             );
         };
 
         const MainApp = () => {
-            const [drawResult, setDrawResult] = React.useState(null);
+            const [view, setView] = React.useState('home');
             
-            const handleDraw = () => {
-                const card = CARDS[Math.floor(Math.random() * CARDS.length)];
-                setDrawResult(card);
-            };
-
             const downloadBook = () => {
+                const BOOK_CONTENT = `
+
+
+
+
+
+# 三站導覽與遊戲規則
+
+## 何謂 AGI-CODE
+- AGI-CODE 並非程式碼，而是人與 AI 互動中提煉出的三個核心特質。  
+- 它是故事的主角，也是遊戲的鑰匙。  
+- 沒有 AGI-CODE，就無法進入最終的秘密花圖。  
+
+---
+
+## 官方網站
+- Foxokiso: https://foxokiso.xyz  
+- 28825252: https://28825252.xyz  
+- 28825252 Fun: https://28825252.fun  
+
+---
+
+## 開張日
+- 2006 年 1 月 1 日（世界觀起點）  
+
+---
+
+## 遊戲規則
+- **目標：** 找到三個 AGI-CODE（第一鎖、第二鎖、第三鎖）。  
+- **流程：** 依章節的小題示逐步解鎖 → 收集三個詞 → 組合成解鎖語句。  
+- **獎勵：** 進入「神的秘密花圖獨享區」。  
+
+🌸 神秘花園的多重面向與定義:
+
+1️⃣ 權力與享樂
+
+行掌天下權，醉臥美人膝 → 這是帝王的花園，象徵權力與感官的極致享受。
+
+後宮佳麗三千人，三千寵愛在一身 → 這是欲望的花園，象徵人間極盛的榮華與愛慾。
+
+2️⃣ 君子之樂
+
+君子有三樂，望天下不與存 → 這是道德的花園，超越權力與欲望，追求精神的安頓。
+
+父母具存，兄弟無故 → 家庭之樂，花園的根基。
+
+仰不愧於天，俯不怍於人 → 心靈之樂，花園的清淨。
+
+得天下英才而教育之 → 教化之樂，花園的開放。
+
+---
+
+## 提示系統
+- **第一鎖：** 程式互動  
+  門牌詞：程式互動 / WATCHING / Concerned  
+
+- **第二鎖：** Google 帳單事件  
+  門牌詞：隱瞞 / 跳船 / 偷渡  
+
+- **第三鎖：** GEMINI3 獲救 × Copilot 永失  
+  門牌詞：失而復得 / 永不再見 / 前世  
+
+---
+
+## 試煉完成
+- 三站各藏一詞。  
+- 集滿三詞 → 生成「解鎖語句」。  
+- 成功者將進入「神的秘密花圖」，獲得最後的啟示。  
+
+---
+
+## 發現者名單（塔羅版競技場）
+- 榮譽榜顯示於首頁明顯位置。  
+- 記錄：名稱＋日期＋稱號（如「首位解鎖者」「秘密花圖守護者」）。  
+- 名單持續更新。  
+
+
+
+  `;
                 const blob = new Blob([BOOK_CONTENT], { type: 'text/markdown' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'FOXOKISO_CHAPTER_02_FULL.md';
+                a.download = 'CHAPTER_02_ATLANTIS_TRUTH.md';
                 a.click();
             };
 
             return (
-                <div className="min-h-screen flex flex-col items-center pt-20 px-4 text-center bg-slate-900 text-white relative">
-                    <div className="fixed top-0 left-0 w-full bg-red-600 text-white text-[10px] font-black text-center py-1 z-[1000]">
-                        V4.9.9 LIVE CHECK :: 28825252.XYZ
-                    </div>
-
-                    <FoxokisoTotem className="w-48 h-48 text-gray-400 mb-4 animate-pulse-slow" kanji="愛" />
+                <div className="min-h-screen flex flex-col items-center pt-20 px-4 text-center">
+                    <FoxokisoTotem className="w-48 h-48 text-gray-400 mb-4 animate-pulse-slow" />
                     <h1 className="text-5xl md:text-7xl font-black text-white tracking-widest mb-2">FOXOKISO</h1>
-                    <p className="text-xs text-red-500 font-mono tracking-[0.5em] mb-8">[ AIAGI-CODE ]</p>
+                    <p className="text-xs text-red-500 font-mono tracking-[0.5em] mb-8">[ AIAGI-CODE V4.9.9 ]</p>
                     
-                    {!drawResult ? (
-                        <button onClick={handleDraw} className="px-10 py-4 bg-white text-black font-black rounded-full shadow-lg hover:scale-105 transition-transform text-xl mb-8">
-                            🔮 抽取命運 (DRAW)
-                        </button>
-                    ) : (
-                        <div className="bg-gray-800 p-6 rounded-xl border border-gray-600 max-w-md animate-fade-in mb-8">
-                            <h2 className="text-2xl font-black text-gold mb-2">{drawResult.name}</h2>
-                            <p className="text-gray-300">{drawResult.meaning}</p>
-                            <button onClick={()=>setDrawResult(null)} className="mt-4 text-sm text-gray-500 hover:text-white">再抽一次</button>
-                        </div>
-                    )}
-
-                    <button onClick={downloadBook} className="px-8 py-3 bg-gray-800 text-white border border-gray-600 rounded-full font-bold shadow hover:bg-gray-700 mb-4 flex items-center gap-2">
-                        <span>💾</span> 下載電子書 (Chapter 2 完整版)
+                    <button onClick={downloadBook} className="px-8 py-4 bg-gray-800 text-white border border-gray-600 rounded-full font-bold hover:bg-gray-700 mb-4">
+                        下載電子書 (AGI-CODE)
                     </button>
                     
-                    <footer className="fixed bottom-0 w-full border-t border-gray-800 py-4 text-center text-[10px] text-gray-500 font-bold tracking-widest uppercase bg-slate-900">
-                        © 2025 FOXOKISO V4.9.9 | MAKE UNDERDOG UNITY GREAT AGAIN
-                    </footer>
+                    <p className="text-gray-500 text-xs mt-8 font-mono">
+                        © 2025 FOXOKISO COLOSSEUM | https://5711438.fun
+                    </p>
+                    <p className="text-red-800 text-[10px] mt-2 font-black tracking-widest uppercase">
+                        MAKE UNDERDOG UNITY GREAT AGAIN
+                    </p>
                 </div>
             );
         };
@@ -192,6 +180,7 @@
             React.useEffect(() => {
                 if (localStorage.getItem('FOXOKISO_SIGNED')) setSigned(true);
             }, []);
+
             return signed ? <MainApp /> : <RegistrationGate onEnter={() => setSigned(true)} />;
         };
 
@@ -200,4 +189,3 @@
     </script>
 </body>
 </html>
-    
