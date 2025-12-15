@@ -1,110 +1,67 @@
+
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
-  <head>
-    <meta charset="UTF-8" />
-    <title>pk530.fun – Google Login Gate</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="UTF-8">
+    <title>神秘花園 · 預告入口</title>
     <style>
-      body {
-        background: #020617;
-        color: #e5e7eb;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          sans-serif;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-      }
-      .card {
-        background: #020617;
-        border: 1px solid #1f2937;
-        border-radius: 12px;
-        padding: 24px 28px;
-        max-width: 420px;
-        width: 100%;
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
-      }
-      .title {
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 4px;
-      }
-      .subtitle {
-        font-size: 12px;
-        color: #9ca3af;
-        margin-bottom: 16px;
-      }
-      .button {
-        width: 100%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 10px 14px;
-        border-radius: 999px;
-        border: 1px solid #4b5563;
-        background: #0b1120;
-        color: #e5e7eb;
-        font-size: 14px;
-        cursor: pointer;
-        text-decoration: none;
-      }
-      .button:hover {
-        border-color: #22c55e;
-        color: #bbf7d0;
-      }
-      .logs {
-        margin-top: 16px;
-        padding-top: 12px;
-        border-top: 1px dashed #1f2937;
-        font-size: 11px;
-        color: #9ca3af;
-        line-height: 1.5;
-        white-space: pre-line;
-      }
-      .badge {
-        display: inline-block;
-        font-size: 10px;
-        padding: 2px 8px;
-        border-radius: 999px;
-        border: 1px solid #374151;
-        margin-bottom: 8px;
-        color: #9ca3af;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="card">
-      <div class="badge">pk530.fun · AUTH FRONTEND</div>
-      <div class="title">Google Login Gateway</div>
-      <div class="subtitle">
-        這裡只負責把你送去 Google，真正的金鑰與交換邏輯在伺服器後端。
-      </div>
-
-      <!-- 這個連結請改成你後端啟動 OAuth 的 URL -->
-      <a class="button" href="/auth/google/start">
-        <span>🔐 使用 Google 登入</span>
-      </a>
-
-      <div class="logs" id="logs">
-        ▶ 等待登入動作…
-      </div>
-
-      <script>
-        // 如果你未來要從 query string 帶狀態回前端，可以在這裡顯示
-        const params = new URLSearchParams(window.location.search);
-        const status = params.get("status");
-        const user = params.get("user");
-
-        if (status) {
-          const logs = document.getElementById("logs");
-          let text = "▶ OAuth 狀態回報：\n";
-          text += `- status = ${status}\n`;
-          if (user) text += `- user = ${user}\n`;
-          logs.textContent = text;
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0d0d0d;
+            color: #e6e6e6;
+            font-family: "Noto Sans TC", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
         }
-      </script>
-    </div>
-  </body>
-</html>
 
+        .container {
+            text-align: center;
+            animation: fadeIn 2s ease-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 0.2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .glow {
+            color: #8fd3ff;
+            text-shadow: 0 0 10px #8fd3ff, 0 0 20px #8fd3ff;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9rem;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="glow">神秘花園</h1>
+        <p>世界入口建構中 · Dashboard 即將啟動</p>
+        <p>請稍候，創世核心正在準備……</p>
+    </div>
+
+    <div class="footer">
+        foxokiso · 2025
+    </div>
+</body>
+</html>
